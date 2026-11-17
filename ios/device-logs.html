@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+  <head>
+<meta name="robots" content="noindex, nofollow">
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>[QA] Device logs – QA1337 Guidelines</title>
+    <meta name="description" content="Collect logs from a connected iPhone or iPad." />
+    <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
+    <meta name="apple-mobile-web-app-title" content="QA1337" />
+    <link rel="stylesheet" href="../assets/style.css" />
+    <script src="../assets/site.js" data-root="../" defer></script>
+  <link rel="stylesheet" href="/assets/qa.css">
+</head>
+  <body data-page="ios-device-logs" data-section="ios">
+<div class="qa-banner">QA version · not the live site <a id="qa-live" href="https://qa1337.com/">View this page on live</a></div>
+<script>document.getElementById('qa-live').href='https://qa1337.com'+location.pathname+location.search+location.hash</script>
+
+    <div class="gbar"></div>
+    <header class="lbar"></header>
+    <div class="wrap">
+      <nav id="nav" aria-label="Guidelines"></nav>
+      <main>
+        <h1>Device logs</h1>
+        <p class="lead">
+          Collect logs from a connected iPhone or iPad to reproduce and diagnose issues.
+        </p>
+        <h2>Find the device</h2>
+        <p>Connect the device, trust the computer, then confirm it is visible.</p>
+        <pre><code>xcrun devicectl list devices</code></pre>
+        <h2>Stream the live log</h2>
+        <p>
+          Open Console on your Mac and select the device in the sidebar, or stream from the terminal
+          with libimobiledevice.
+        </p>
+        <pre><code>brew install libimobiledevice
+idevicesyslog | grep "YourApp"</code></pre>
+        <h2>Export crash logs</h2>
+        <p>
+          On the device, open Settings › Privacy &amp; Security › Analytics &amp; Improvements ›
+          Analytics Data and share the crash file with the bug report.
+        </p>
+      </main>
+    </div>
+  </body>
+</html>

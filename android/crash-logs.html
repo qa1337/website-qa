@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+  <head>
+<meta name="robots" content="noindex, nofollow">
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>[QA] Crash &amp; error logs – QA1337 Guidelines</title>
+    <meta
+      name="description"
+      content="Collect crash stacks and logs from an Android device with Logcat, ADB or a bug report."
+    />
+    <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
+    <meta name="apple-mobile-web-app-title" content="QA1337" />
+    <link rel="stylesheet" href="../assets/style.css" />
+    <script src="../assets/site.js" data-root="../" defer></script>
+  <link rel="stylesheet" href="/assets/qa.css">
+</head>
+  <body data-page="android-crash-logs" data-section="android">
+<div class="qa-banner">QA version · not the live site <a id="qa-live" href="https://qa1337.com/">View this page on live</a></div>
+<script>document.getElementById('qa-live').href='https://qa1337.com'+location.pathname+location.search+location.hash</script>
+
+    <div class="gbar"></div>
+    <header class="lbar"></header>
+    <div class="wrap">
+      <nav id="nav" aria-label="Guidelines"></nav>
+      <main>
+        <h1>Android crash &amp; error logs</h1>
+        <p class="lead">
+          Collect crash stacks and device logs from an Android phone or tablet so developers can
+          find the cause of a crash, freeze or error.
+        </p>
+        <p class="related">
+          Other platforms: <a href="../ios/crash-logs">iOS crash &amp; error logs</a> ·
+          <a href="../web/crash-logs">Browser exception &amp; error logs</a>
+        </p>
+
+        <h2>Before you start</h2>
+        <ul class="c">
+          <li>
+            Turn on Developer options and USB debugging on the device. See
+            <a href="adb">Platform tools &amp; ADB</a> for the steps.
+          </li>
+          <li>
+            Android Studio, or the Android platform tools (<code>adb</code>) on your computer.
+          </li>
+          <li>A USB cable, and the time the crash happened.</li>
+        </ul>
+
+        <h2>Logcat in Android Studio</h2>
+        <ol class="s">
+          <li>Connect the device and accept the <b>Allow USB debugging</b> prompt.</li>
+          <li>In Android Studio, open <b>View › Tool Windows › Logcat</b>.</li>
+          <li>Select the device at the top of the Logcat window.</li>
+          <li>
+            Filter the logs, for example <code>package:mine level:error</code>, or search for
+            <code>FATAL EXCEPTION</code>.
+          </li>
+          <li>
+            Reproduce the issue. Copy the crash block, from <code>FATAL EXCEPTION</code> to the end
+            of the stack trace, into the bug report.
+          </li>
+        </ol>
+        <figure class="shot">
+          <img
+            src="../images/logcat-logs.png"
+            width="1386"
+            height="463"
+            loading="lazy"
+            alt="Android Studio Logcat window showing log lines for an app running on an emulator"
+          />
+          <figcaption>Logcat in Android Studio, filtered by the app package.</figcaption>
+        </figure>
+        <div class="note">
+          <b>Capture right away</b>Logcat keeps only recent messages and clears them quickly.
+          Connect the device as soon as the crash happens, or keep Logcat open while you test.
+        </div>
+
+        <h2>Logcat from the command line</h2>
+        <p>
+          Clear old logs, start recording, reproduce the issue, then stop with <code>Ctrl+C</code>.
+        </p>
+        <pre><code>adb logcat -c
+adb logcat &gt; logcat.txt</code></pre>
+        <p>Save only the crash messages from the device:</p>
+        <pre><code>adb logcat -b crash -d &gt; crash.txt</code></pre>
+        <p>For freezes and "app not responding" (ANR), collect a full bug report:</p>
+        <pre><code>adb bugreport bugreport.zip</code></pre>
+
+        <h2>Without a computer</h2>
+        <ol class="s">
+          <li>Open <b>Settings › System › Developer options</b>.</li>
+          <li>
+            Tap <b>Bug report</b> (or <b>Take bug report</b>) and choose <b>Interactive report</b>.
+          </li>
+          <li>When the notification says it is ready, tap it and share the zip file.</li>
+        </ol>
+        <p>
+          The name and location of these settings vary by device brand (Samsung, Pixel, Xiaomi and
+          others).
+        </p>
+
+        <h2>What to include in the report</h2>
+        <ul class="c">
+          <li>App version and build number.</li>
+          <li>Device model and Android version.</li>
+          <li>Date and time of the crash, and the steps to reproduce it.</li>
+          <li>
+            A zip file with all the logs from the session, not only the lines that show the crash.
+          </li>
+        </ul>
+      </main>
+    </div>
+  </body>
+</html>

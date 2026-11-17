@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+  <head>
+<meta name="robots" content="noindex, nofollow">
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>[QA] Test levels – QA1337 Guidelines</title>
+    <meta
+      name="description"
+      content="Unit, integration, system and acceptance testing, and who does each."
+    />
+    <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
+    <meta name="apple-mobile-web-app-title" content="QA1337" />
+    <link rel="stylesheet" href="../assets/style.css" />
+    <script src="../assets/site.js" data-root="../" defer></script>
+  <link rel="stylesheet" href="/assets/qa.css">
+</head>
+  <body data-page="fund-levels" data-section="fundamentals">
+<div class="qa-banner">QA version · not the live site <a id="qa-live" href="https://qa1337.com/">View this page on live</a></div>
+<script>document.getElementById('qa-live').href='https://qa1337.com'+location.pathname+location.search+location.hash</script>
+
+    <div class="gbar"></div>
+    <header class="lbar"></header>
+    <div class="wrap">
+      <nav id="nav" aria-label="Guidelines"></nav>
+      <main>
+        <h1>Test levels</h1>
+        <p class="lead">
+          Software is tested in layers, from a single function up to the whole product in the hands
+          of real users. Each level catches a different kind of bug.
+        </p>
+
+        <h2>The four levels</h2>
+        <div class="tbl">
+          <table>
+            <thead>
+              <tr>
+                <th>Level</th>
+                <th>What is tested</th>
+                <th>Who</th>
+                <th>Catches</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><b>Unit</b></td>
+                <td>One function, class or component</td>
+                <td>Developers</td>
+                <td>Logic errors, edge cases in code</td>
+              </tr>
+              <tr>
+                <td><b>Integration</b></td>
+                <td>Two or more parts working together</td>
+                <td>Developers, QA</td>
+                <td>Wrong contracts, data format mismatches, broken APIs</td>
+              </tr>
+              <tr>
+                <td><b>System</b></td>
+                <td>The complete app, end to end</td>
+                <td>QA</td>
+                <td>Broken flows, platform issues, regressions</td>
+              </tr>
+              <tr>
+                <td><b>Acceptance (UAT)</b></td>
+                <td>The app against business needs</td>
+                <td>Product owner, client, users</td>
+                <td>Wrong requirements, missing features</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2>Unit testing</h2>
+        <p>
+          The smallest piece of code, tested on its own. Dependencies like the network or database
+          are replaced with fakes, so unit tests are fast and run on every commit.
+        </p>
+        <pre><code>formatPrice(1999, "USD")  -> "$19.99"
+formatPrice(0, "USD")     -> "$0.00"
+formatPrice(-500, "USD")  -> "-$5.00"</code></pre>
+        <ul class="c">
+          <li>Ask developers which areas have unit tests, so you don't repeat them by hand.</li>
+          <li>A bug you find that a unit test could have caught is worth a unit test.</li>
+        </ul>
+
+        <h2>Integration testing</h2>
+        <p>
+          Checks that parts talk to each other correctly: the app and its API, the API and the
+          database, your service and a payment provider.
+        </p>
+        <ul class="c">
+          <li>Does the app handle every field the API sends, including <code>null</code>?</li>
+          <li>What happens when the API is slow, returns an error or times out?</li>
+          <li>Do dates, currencies and time zones survive the trip between systems?</li>
+        </ul>
+        <div class="note">
+          <b>Where bugs hide</b>Each part can pass its own tests and still fail together. Many
+          production incidents are integration bugs.
+        </div>
+
+        <h2>System testing</h2>
+        <p>
+          The full app on real devices and browsers, tested the way users use it. This is where QA
+          spends most of its time.
+        </p>
+        <ul class="c">
+          <li>Complete flows: sign up, buy, cancel, sign out.</li>
+          <li>Different devices, OS versions, browsers and screen sizes.</li>
+          <li>Functional and non-functional checks. See <a href="test-types">Test types</a>.</li>
+          <li>Use an environment that is as close to production as you can get.</li>
+        </ul>
+
+        <h2>Acceptance testing (UAT)</h2>
+        <p>
+          User acceptance testing answers one question: is this what we asked for? It is done by the
+          people who own the requirements, often with acceptance criteria written in advance.
+        </p>
+        <pre><code>Given I have items in my cart
+When I apply a valid coupon
+Then the discount shows on the order summary
+And the total is updated before I pay</code></pre>
+        <ul class="c">
+          <li><b>Alpha testing:</b> done inside the company, before release.</li>
+          <li><b>Beta testing:</b> done by a group of real users, for example TestFlight or Play
+            Console testing tracks.</li>
+        </ul>
+
+        <h2>The test pyramid</h2>
+        <p>
+          Have many fast unit tests at the bottom, fewer integration tests in the middle and a small
+          set of slow end-to-end tests on top. When most tests sit at the top, the suite gets slow
+          and flaky.
+        </p>
+        <pre><code>        /\        UI / end-to-end   few, slow
+       /  \
+      /----\      Integration       some
+     /      \
+    /--------\    Unit              many, fast</code></pre>
+      </main>
+    </div>
+  </body>
+</html>

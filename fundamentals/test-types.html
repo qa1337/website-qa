@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+  <head>
+<meta name="robots" content="noindex, nofollow">
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>[QA] Functional and non-functional testing – QA1337 Guidelines</title>
+    <meta
+      name="description"
+      content="Functional testing plus performance, usability, accessibility and security checks."
+    />
+    <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
+    <meta name="apple-mobile-web-app-title" content="QA1337" />
+    <link rel="stylesheet" href="../assets/style.css" />
+    <script src="../assets/site.js" data-root="../" defer></script>
+  <link rel="stylesheet" href="/assets/qa.css">
+</head>
+  <body data-page="fund-types" data-section="fundamentals">
+<div class="qa-banner">QA version · not the live site <a id="qa-live" href="https://qa1337.com/">View this page on live</a></div>
+<script>document.getElementById('qa-live').href='https://qa1337.com'+location.pathname+location.search+location.hash</script>
+
+    <div class="gbar"></div>
+    <header class="lbar"></header>
+    <div class="wrap">
+      <nav id="nav" aria-label="Guidelines"></nav>
+      <main>
+        <h1>Functional and non-functional testing</h1>
+        <p class="lead">
+          Functional testing checks what the app does. Non-functional testing checks how well it
+          does it: how fast, how easy, how accessible and how safe.
+        </p>
+
+        <h2>Functional testing</h2>
+        <p>
+          Every feature behaves as the requirements say. You compare the actual result with the
+          expected one.
+        </p>
+        <ul class="c">
+          <li>Sign in, sign up, password reset.</li>
+          <li>Forms validate input and show clear errors.</li>
+          <li>Calculations are correct: totals, taxes, discounts.</li>
+          <li>Permissions: users only see and change what they are allowed to.</li>
+          <li>Notifications, emails and deep links open the right place.</li>
+        </ul>
+        <div class="note">
+          <b>Expected result first</b>Write down what should happen before you run the test.
+          Otherwise it is easy to accept whatever the app does.
+        </div>
+
+        <h2>Performance testing</h2>
+        <p>How the app behaves under time and load pressure.</p>
+        <ul class="c">
+          <li><b>Load:</b> expected number of users at the same time.</li>
+          <li><b>Stress:</b> more than expected, until something breaks. How does it fail?</li>
+          <li><b>Soak:</b> normal load for hours, to find memory leaks and slow decay.</li>
+          <li>
+            <b>Client side:</b> launch time, screen load time, scroll smoothness, battery use.
+          </li>
+        </ul>
+        <h3>Quick checks you can do without tools</h3>
+        <ul class="c">
+          <li>Test on an old, low-end device, not only the newest phone.</li>
+          <li>Throttle the network to slow 3G in DevTools or with the emulator settings.</li>
+          <li>Load a list with hundreds of items, not just three.</li>
+          <li>Leave the app open in the background and come back later.</li>
+        </ul>
+
+        <h2>Usability testing</h2>
+        <p>Can people use it without help?</p>
+        <ul class="c">
+          <li>Can a new user finish the main task without instructions?</li>
+          <li>Are labels, errors and empty states clear?</li>
+          <li>Is the flow consistent with the platform: back button, gestures, keyboard types?</li>
+          <li>Are buttons big enough to tap, and easy to reach on a large phone?</li>
+        </ul>
+
+        <h2>Accessibility testing</h2>
+        <p>
+          Everyone can use the app, including people who use screen readers, larger text, keyboard
+          only or high contrast.
+        </p>
+        <ul class="c">
+          <li>Turn on VoiceOver (iOS) or TalkBack (Android) and complete the main flow.</li>
+          <li>On web, use only the keyboard: Tab, Shift+Tab, Enter, Space, Esc.</li>
+          <li>Set the largest text size and check nothing is cut off.</li>
+          <li>Every image and icon button has a meaningful label.</li>
+          <li>Color contrast meets WCAG AA, and color is never the only signal.</li>
+        </ul>
+        <p>See the accessibility pass in <a href="../resources/checklists">Checklists</a>.</p>
+
+        <h2>Security testing</h2>
+        <p>
+          Data stays private and users can't do more than they should. Deep security testing is a
+          specialist job, but QA can catch the common problems.
+        </p>
+        <ul class="c">
+          <li>Change an ID in a URL or request. Can you see another user's data?</li>
+          <li>Sign out, then press back. Is private data still on screen?</li>
+          <li>Are passwords, tokens or personal data written to logs or local storage?</li>
+          <li>Do sessions expire, and does a changed password sign out other devices?</li>
+          <li>Is every request sent over HTTPS?</li>
+        </ul>
+        <div class="note">
+          <b>Only test what you own</b>Run security checks on your own app and test environments,
+          with permission. Never against systems you don't have approval to test.
+        </div>
+
+        <h2>Other non-functional types</h2>
+        <ul class="c">
+          <li><b>Compatibility:</b> devices, OS versions, browsers. See
+            <a href="../android/device-fragmentation">Device fragmentation</a>.</li>
+          <li><b>Reliability:</b> airplane mode, lost connection, app killed mid-action.</li>
+          <li><b>Localization:</b> long translations, right-to-left languages, date and number
+            formats.</li>
+          <li><b>Install and update:</b> fresh install, update from the previous version, data
+            kept after update.</li>
+        </ul>
+      </main>
+    </div>
+  </body>
+</html>

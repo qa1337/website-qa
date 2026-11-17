@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+  <head>
+<meta name="robots" content="noindex, nofollow">
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>[QA] Device fragmentation – QA1337 Guidelines</title>
+    <meta
+      name="description"
+      content="Plan around screen sizes, OS versions, and manufacturer skins."
+    />
+    <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
+    <meta name="apple-mobile-web-app-title" content="QA1337" />
+    <link rel="stylesheet" href="../assets/style.css" />
+    <script src="../assets/site.js" data-root="../" defer></script>
+  <link rel="stylesheet" href="/assets/qa.css">
+</head>
+  <body data-page="android-fragmentation" data-section="android">
+<div class="qa-banner">QA version · not the live site <a id="qa-live" href="https://qa1337.com/">View this page on live</a></div>
+<script>document.getElementById('qa-live').href='https://qa1337.com'+location.pathname+location.search+location.hash</script>
+
+    <div class="gbar"></div>
+    <header class="lbar"></header>
+    <div class="wrap">
+      <nav id="nav" aria-label="Guidelines"></nav>
+      <main>
+        <h1>Device fragmentation</h1>
+        <p class="lead">Fragmentation is the main risk on Android. Plan around what varies.</p>
+        <h2>What varies</h2>
+        <div class="tbl">
+          <table>
+            <thead>
+              <tr>
+                <th>Dimension</th>
+                <th>What to vary</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Screen</td>
+                <td>Small phone, large phone, tablet, foldable</td>
+              </tr>
+              <tr>
+                <td>OS version</td>
+                <td>Latest, and the oldest you support</td>
+              </tr>
+              <tr>
+                <td>Manufacturer skin</td>
+                <td>Samsung, Pixel, Xiaomi</td>
+              </tr>
+              <tr>
+                <td>Memory</td>
+                <td>Low-RAM devices</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <h2>Device checklist</h2>
+        <ul class="c">
+          <li>Cover at least one Samsung and one Pixel device.</li>
+          <li>Test with battery saver on and off.</li>
+          <li>Verify permissions on first launch and after revoke.</li>
+        </ul>
+      </main>
+    </div>
+  </body>
+</html>

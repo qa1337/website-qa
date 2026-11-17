@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+  <head>
+<meta name="robots" content="noindex, nofollow">
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>[QA] Exception &amp; error logs – QA1337 Guidelines</title>
+    <meta
+      name="description"
+      content="Collect console errors and exceptions from desktop and mobile browsers."
+    />
+    <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
+    <meta name="apple-mobile-web-app-title" content="QA1337" />
+    <link rel="stylesheet" href="../assets/style.css" />
+    <script src="../assets/site.js" data-root="../" defer></script>
+  <link rel="stylesheet" href="/assets/qa.css">
+</head>
+  <body data-page="web-crash-logs" data-section="web">
+<div class="qa-banner">QA version · not the live site <a id="qa-live" href="https://qa1337.com/">View this page on live</a></div>
+<script>document.getElementById('qa-live').href='https://qa1337.com'+location.pathname+location.search+location.hash</script>
+
+    <div class="gbar"></div>
+    <header class="lbar"></header>
+    <div class="wrap">
+      <nav id="nav" aria-label="Guidelines"></nav>
+      <main>
+        <h1>Browser exception &amp; error logs</h1>
+        <p class="lead">
+          Collect JavaScript exceptions and console errors from desktop and mobile browsers so
+          developers can see what went wrong.
+        </p>
+        <p class="related">
+          Other platforms: <a href="../ios/crash-logs">iOS crash &amp; error logs</a> ·
+          <a href="../android/crash-logs">Android crash &amp; error logs</a>
+        </p>
+
+        <h2>Desktop browsers</h2>
+        <ol class="s">
+          <li>
+            Open the developer tools: <code>F12</code> or <code>Ctrl+Shift+I</code> on Windows and
+            Linux, <code>⌘⌥I</code> on Mac.
+          </li>
+          <li>
+            Go to the <b>Console</b> tab and turn on <b>Preserve log</b> so reloads don't clear it.
+          </li>
+          <li>Reproduce the issue. Errors and exceptions show in red.</li>
+          <li>Right-click the console and choose <b>Save as…</b> to export the log.</li>
+        </ol>
+        <div class="note">
+          <b>Safari on Mac</b>Turn on the developer tools first:
+          <strong>Safari › Settings › Advanced</strong> ›
+          <strong>Show features for web developers</strong> (called
+          <strong>Show Develop menu in menu bar</strong> in older versions).
+        </div>
+        <p>
+          If the error comes from a failed request, also export the network log. See
+          <a href="network-debugging">Network debugging</a>.
+        </p>
+
+        <h2>Chrome, Edge and Samsung Internet on Android</h2>
+        <ol class="s">
+          <li>Turn on USB debugging on the phone and connect it to your computer.</li>
+          <li>On the computer, open Chrome and go to <code>chrome://inspect/#devices</code>.</li>
+          <li>Find the phone's tab in the list and click <b>inspect</b>.</li>
+          <li>Use the <b>Console</b> tab as you would on desktop.</li>
+        </ol>
+
+        <h2>Firefox on Android</h2>
+        <ol class="s">
+          <li>
+            On the phone, open Firefox <b>Settings</b> and turn on <b>Remote debugging via USB</b>.
+          </li>
+          <li>On the computer, open Firefox and go to <code>about:debugging#/setup</code>.</li>
+          <li>Click <b>Enable USB Devices</b> if shown, then connect to the phone.</li>
+          <li>
+            Select the tab you want and click <b>Inspect</b>, then open the <b>Console</b> tab.
+          </li>
+        </ol>
+
+        <h2>Safari on iPhone and iPad</h2>
+        <ol class="s">
+          <li>
+            On the device, open <b>Settings › Apps › Safari › Advanced</b> (or
+            <b>Settings › Safari › Advanced</b> on older iOS) and turn on <b>Web Inspector</b>.
+          </li>
+          <li>Connect the device to a Mac and open Safari on the Mac.</li>
+          <li>
+            In the <b>Develop</b> menu, choose the device and then the page you want to inspect.
+          </li>
+          <li>Use the <b>Console</b> tab as you would on desktop.</li>
+        </ol>
+
+        <h2>What to include in the report</h2>
+        <ul class="c">
+          <li>Browser name and version, device and operating system.</li>
+          <li>The page URL, the date and time, and the steps to reproduce.</li>
+          <li>The exported console log, and the network log if requests failed.</li>
+          <li>How many users or devices had the problem, if you know.</li>
+        </ul>
+      </main>
+    </div>
+  </body>
+</html>

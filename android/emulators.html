@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+<meta name="robots" content="noindex, nofollow">
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>[QA] Emulators – QA1337 Guidelines</title>
+    <meta name="description" content="Run and configure Android emulators." />
+    <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
+    <meta name="apple-mobile-web-app-title" content="QA1337" />
+    <link rel="stylesheet" href="../assets/style.css" />
+    <script src="../assets/site.js" data-root="../" defer></script>
+  <link rel="stylesheet" href="/assets/qa.css">
+</head>
+  <body data-page="android-emulators" data-section="android">
+<div class="qa-banner">QA version · not the live site <a id="qa-live" href="https://qa1337.com/">View this page on live</a></div>
+<script>document.getElementById('qa-live').href='https://qa1337.com'+location.pathname+location.search+location.hash</script>
+
+    <div class="gbar"></div>
+    <header class="lbar"></header>
+    <div class="wrap">
+      <nav id="nav" aria-label="Guidelines"></nav>
+      <main>
+        <h1>Emulators</h1>
+        <p class="lead">Emulators make it cheap to cover many screen sizes and OS versions.</p>
+        <h2>Start an emulator</h2>
+        <pre><code>emulator -list-avds
+emulator -avd Pixel_8_API_34 -no-snapshot-load</code></pre>
+        <h2>Simulate poor networks</h2>
+        <pre><code>emulator -avd Pixel_8_API_34 -netspeed edge -netdelay none</code></pre>
+        <div class="note">
+          <b>Tip</b>Start from a clean state with <code>-no-snapshot-load</code> when reproducing
+          first-launch bugs.
+        </div>
+      </main>
+    </div>
+  </body>
+</html>

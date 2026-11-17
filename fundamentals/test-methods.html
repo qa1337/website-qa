@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+  <head>
+<meta name="robots" content="noindex, nofollow">
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>[QA] Black, white and grey box testing – QA1337 Guidelines</title>
+    <meta name="description" content="The three test methods and when QA should use each one." />
+    <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
+    <meta name="apple-mobile-web-app-title" content="QA1337" />
+    <link rel="stylesheet" href="../assets/style.css" />
+    <script src="../assets/site.js" data-root="../" defer></script>
+  <link rel="stylesheet" href="/assets/qa.css">
+</head>
+  <body data-page="fund-methods" data-section="fundamentals">
+<div class="qa-banner">QA version · not the live site <a id="qa-live" href="https://qa1337.com/">View this page on live</a></div>
+<script>document.getElementById('qa-live').href='https://qa1337.com'+location.pathname+location.search+location.hash</script>
+
+    <div class="gbar"></div>
+    <header class="lbar"></header>
+    <div class="wrap">
+      <nav id="nav" aria-label="Guidelines"></nav>
+      <main>
+        <h1>Black, white and grey box testing</h1>
+        <p class="lead">
+          The three methods describe how much you know about the code while you test. Most QA work
+          is black box, but knowing a little about the inside helps you find bugs faster.
+        </p>
+
+        <h2>At a glance</h2>
+        <div class="tbl">
+          <table>
+            <thead>
+              <tr>
+                <th>Method</th>
+                <th>You know</th>
+                <th>Usually done by</th>
+                <th>Typical example</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><b>Black box</b></td>
+                <td>Only inputs and outputs</td>
+                <td>QA, product, users</td>
+                <td>Sign in with a valid and an invalid password</td>
+              </tr>
+              <tr>
+                <td><b>Grey box</b></td>
+                <td>Some internals: API, database, logs</td>
+                <td>QA</td>
+                <td>
+                  Create an order in the app, then check the API response and the stored record
+                </td>
+              </tr>
+              <tr>
+                <td><b>White box</b></td>
+                <td>The source code</td>
+                <td>Developers</td>
+                <td>Unit tests that cover every branch of a function</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2>Black box testing</h2>
+        <p>
+          You treat the app as a closed box. You give it input, watch what comes out and compare it
+          with the requirements. You don't need to read any code.
+        </p>
+        <ul class="c">
+          <li><b>Based on:</b> requirements, user stories, designs and how real users behave.</li>
+          <li><b>Good at:</b> finding missing features, wrong behavior and confusing flows.</li>
+          <li><b>Blind spot:</b> code paths you can't reach or can't see from the UI.</li>
+        </ul>
+        <pre><code>Requirement: a coupon code gives 10% off orders over $50.
+
+Test: order of $60 + code SAVE10  -> total $54.00
+Test: order of $40 + code SAVE10  -> error "Order must be over $50"
+Test: order of $60 + code save10  -> is the code case-sensitive? Check the spec.</code></pre>
+
+        <h2>White box testing</h2>
+        <p>
+          You read the code and design tests that exercise its paths: every <code>if</code>, every
+          loop, every error handler. This is mostly what unit tests do.
+        </p>
+        <ul class="c">
+          <li><b>Based on:</b> the source code and its structure.</li>
+          <li>
+            <b>Good at:</b> dead code, unhandled branches, off-by-one errors and missing error
+            handling.
+          </li>
+          <li>
+            <b>Blind spot:</b> features that were never built. You can't cover code that doesn't
+            exist.
+          </li>
+        </ul>
+        <h3>Coverage terms you will hear</h3>
+        <ul class="c">
+          <li><b>Statement coverage:</b> every line ran at least once.</li>
+          <li>
+            <b>Branch coverage:</b> every <code>if</code> went both ways, true and false.
+          </li>
+          <li><b>Path coverage:</b> every combination of branches ran. Rarely practical.</li>
+        </ul>
+        <div class="note">
+          <b>Coverage is not quality</b>100% line coverage only means every line ran. It doesn't
+          mean the results were checked, or that the requirements were right.
+        </div>
+
+        <h2>Grey box testing</h2>
+        <p>
+          You test from the outside like a user, but you use what you know about the inside to pick
+          better tests and check results more closely. This is where QA adds the most value.
+        </p>
+        <ul class="c">
+          <li>Watch the network requests while you use the app.</li>
+          <li>Check the database, logs or analytics events after an action.</li>
+          <li>Change data directly to reach a state that is hard to reach from the UI.</li>
+          <li>Read the API docs to find fields and limits the UI doesn't show.</li>
+        </ul>
+        <pre><code>Test: change the profile name to "Ana Lúcia"
+UI:      new name shows on the profile screen
+Network: PUT /profile returns 200 with the new name
+Logs:    no warnings about encoding
+Reload:  name is still correct after closing and reopening the app</code></pre>
+        <p>
+          To get started, see <a href="../web/network-debugging">Network debugging</a>,
+          <a href="../web/storage-and-cookies">Storage and cookies</a> and
+          <a href="../android/adb">Platform tools &amp; ADB</a>.
+        </p>
+
+        <h2>Which one to use</h2>
+        <ul class="c">
+          <li>Start black box: does it do what the user and the spec expect?</li>
+          <li>Go grey box when something fails, or when the UI hides what really happened.</li>
+          <li>Leave white box to the developers, and ask what their unit tests already cover.</li>
+        </ul>
+      </main>
+    </div>
+  </body>
+</html>

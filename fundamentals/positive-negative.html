@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+  <head>
+<meta name="robots" content="noindex, nofollow">
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>[QA] Positive and negative testing – QA1337 Guidelines</title>
+    <meta
+      name="description"
+      content="Test with valid input and with invalid input, and what a good failure looks like."
+    />
+    <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
+    <meta name="apple-mobile-web-app-title" content="QA1337" />
+    <link rel="stylesheet" href="../assets/style.css" />
+    <script src="../assets/site.js" data-root="../" defer></script>
+  <link rel="stylesheet" href="/assets/qa.css">
+</head>
+  <body data-page="fund-positive-negative" data-section="fundamentals">
+<div class="qa-banner">QA version · not the live site <a id="qa-live" href="https://qa1337.com/">View this page on live</a></div>
+<script>document.getElementById('qa-live').href='https://qa1337.com'+location.pathname+location.search+location.hash</script>
+
+    <div class="gbar"></div>
+    <header class="lbar"></header>
+    <div class="wrap">
+      <nav id="nav" aria-label="Guidelines"></nav>
+      <main>
+        <h1>Positive and negative testing</h1>
+        <p class="lead">
+          Positive tests check that the app works with valid input. Negative tests check that it
+          fails safely with invalid input. You need both.
+        </p>
+
+        <h2>Positive testing</h2>
+        <p>
+          Use the app the way it is meant to be used, with valid data, and confirm the expected
+          result. This is the "happy path".
+        </p>
+        <ul class="c">
+          <li>Sign in with a correct email and password.</li>
+          <li>Upload a JPEG under the size limit.</li>
+          <li>Enter a valid phone number with the country code.</li>
+        </ul>
+
+        <h2>Negative testing</h2>
+        <p>
+          Give the app input or actions it should reject, and confirm it handles them well: a clear
+          message, no crash, no bad data saved.
+        </p>
+        <ul class="c">
+          <li>Wrong password, empty fields, an email without <code>@</code>.</li>
+          <li>
+            A 50 MB file, a PDF where an image is expected, a file renamed to <code>.jpg</code>.
+          </li>
+          <li>Letters in a number field, emoji, very long text, leading and trailing spaces.</li>
+          <li>Tapping Submit twice, going back mid-flow, losing connection during save.</li>
+        </ul>
+
+        <h2>Example: age field</h2>
+        <p>Requirement: users must be between 18 and 120 to sign up.</p>
+        <div class="tbl">
+          <table>
+            <thead>
+              <tr>
+                <th>Type</th>
+                <th>Input</th>
+                <th>Expected</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Positive</td>
+                <td><code>18</code></td>
+                <td>Accepted</td>
+              </tr>
+              <tr>
+                <td>Positive</td>
+                <td><code>45</code></td>
+                <td>Accepted</td>
+              </tr>
+              <tr>
+                <td>Positive</td>
+                <td><code>120</code></td>
+                <td>Accepted</td>
+              </tr>
+              <tr>
+                <td>Negative</td>
+                <td><code>17</code></td>
+                <td>"You must be 18 or older"</td>
+              </tr>
+              <tr>
+                <td>Negative</td>
+                <td><code>121</code></td>
+                <td>"Enter a valid age"</td>
+              </tr>
+              <tr>
+                <td>Negative</td>
+                <td><code>-1</code>, <code>abc</code>, empty</td>
+                <td>"Enter a valid age"</td>
+              </tr>
+              <tr>
+                <td>Negative</td>
+                <td><code>25.5</code></td>
+                <td>Rejected, or rounded if the spec says so</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>
+          The values at the edges come from <a href="test-design">boundary value analysis</a>.
+        </p>
+
+        <h2>What a good failure looks like</h2>
+        <ul class="c">
+          <li>The message says what is wrong and how to fix it.</li>
+          <li>The error shows next to the field, and the rest of the input is kept.</li>
+          <li>Nothing invalid is saved or sent.</li>
+          <li>No crash, no frozen screen, no raw error code or stack trace shown to the user.</li>
+        </ul>
+        <div class="note">
+          <b>Check both sides</b>Most bugs live in negative paths, because developers usually build
+          and try the happy path first. Spend at least as long breaking things as confirming they
+          work.
+        </div>
+      </main>
+    </div>
+  </body>
+</html>

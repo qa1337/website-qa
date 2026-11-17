@@ -1,0 +1,46 @@
+/* QA-only banner. Loaded only on qa.qa1337.com (the QA workflow injects it); the live site never uses this file. */
+:root {
+  --qa-h: 32px;
+  --safe-top: env(safe-area-inset-top, 0px);
+}
+.qa-banner {
+  position: fixed;
+  top: var(--safe-top);
+  left: 0;
+  right: 0;
+  z-index: 40;
+  height: var(--qa-h);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 0 16px;
+  background: #ffb020;
+  color: #1d1d1f;
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.qa-banner a {
+  color: inherit;
+  text-decoration: underline;
+}
+body {
+  padding-top: var(--qa-h);
+}
+html {
+  scroll-padding-top: calc(68px + var(--qa-h) + var(--safe-top));
+}
+.lbar {
+  top: calc(var(--qa-h) + var(--safe-top));
+}
+nav {
+  top: calc(56px + var(--qa-h) + var(--safe-top));
+  height: calc(100vh - 56px - var(--qa-h) - var(--safe-top));
+}
+@media (max-width: 900px) {
+  nav {
+    height: auto;
+  }
+}

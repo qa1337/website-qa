@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+  <head>
+<meta name="robots" content="noindex, nofollow">
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>[QA] Test design techniques – QA1337 Guidelines</title>
+    <meta
+      name="description"
+      content="Equivalence partitioning, boundary value analysis and exploratory testing."
+    />
+    <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
+    <meta name="apple-mobile-web-app-title" content="QA1337" />
+    <link rel="stylesheet" href="../assets/style.css" />
+    <script src="../assets/site.js" data-root="../" defer></script>
+  <link rel="stylesheet" href="/assets/qa.css">
+</head>
+  <body data-page="fund-design" data-section="fundamentals">
+<div class="qa-banner">QA version · not the live site <a id="qa-live" href="https://qa1337.com/">View this page on live</a></div>
+<script>document.getElementById('qa-live').href='https://qa1337.com'+location.pathname+location.search+location.hash</script>
+
+    <div class="gbar"></div>
+    <header class="lbar"></header>
+    <div class="wrap">
+      <nav id="nav" aria-label="Guidelines"></nav>
+      <main>
+        <h1>Test design techniques</h1>
+        <p class="lead">
+          You can't test every possible input. These techniques help you choose a small set of
+          tests that still finds most of the bugs.
+        </p>
+
+        <h2>Equivalence partitioning</h2>
+        <p>
+          Split the possible inputs into groups that the app should treat the same way. Test one
+          value from each group. If one value in a group works, the others most likely do too.
+        </p>
+        <pre><code>Requirement: shipping is free for orders of $50 or more.
+
+Partition               Example   Expected
+Invalid: below $0       -10       Error
+Valid: $0 to $49.99     30        Shipping charged
+Valid: $50 and up       80        Free shipping
+Invalid: not a number   abc       Error</code></pre>
+        <ul class="c">
+          <li>Always include the invalid groups, not just the valid ones.</li>
+          <li>Partitions also apply to things other than numbers: user types, file types, countries,
+            payment methods.</li>
+        </ul>
+
+        <h2>Boundary value analysis</h2>
+        <p>
+          Bugs gather at the edges, where a developer wrote <code>&gt;</code> instead of
+          <code>&gt;=</code>. For each boundary, test the value just below, on and just above it.
+        </p>
+        <pre><code>Requirement: a password must be 8 to 64 characters.
+
+Length   Expected
+7        Rejected
+8        Accepted
+9        Accepted
+63       Accepted
+64       Accepted
+65       Rejected</code></pre>
+        <h3>Boundaries are everywhere</h3>
+        <ul class="c">
+          <li>Character limits in text fields and usernames.</li>
+          <li>File size and image dimension limits.</li>
+          <li>Dates: end of month, leap years, midnight, daylight saving changes.</li>
+          <li>Lists: zero items, one item, the page size, one more than the page size.</li>
+          <li>Money: $0.00, $0.01, the maximum transaction amount.</li>
+        </ul>
+        <div class="note">
+          <b>Use them together</b>Partition first to find the groups, then test the boundaries
+          between them. With the shipping example: 49.99, 50.00 and 50.01.
+        </div>
+
+        <h2>Exploratory testing</h2>
+        <p>
+          Learning, designing and running tests at the same time, without a script. You follow
+          what the app shows you and dig where something feels off. It finds bugs that scripted
+          tests miss.
+        </p>
+        <h3>Run a session</h3>
+        <ol class="s">
+          <li>
+            Write a short charter: what you will explore and what you are looking for.
+          </li>
+          <li>Set a time box, for example 45 to 60 minutes.</li>
+          <li>Explore. Take notes of what you tried, questions and anything strange.</li>
+          <li>Write up bugs and follow-up ideas at the end.</li>
+        </ol>
+        <pre><code>Charter: Explore the checkout with saved cards
+to find problems with expired and removed cards.
+
+Time box: 45 min
+Device:   iPhone 15, iOS 18
+Notes:    ...
+Bugs:     ...
+Ideas:    try the same on Android, try with a card removed on web</code></pre>
+        <h3>Ideas to try</h3>
+        <ul class="c">
+          <li>Interrupt: incoming call, notification, rotate the screen, lock the phone.</li>
+          <li>Go back and forward in an unusual order.</li>
+          <li>Use two devices or two tabs with the same account.</li>
+          <li>Change settings mid-flow: language, dark mode, text size, permissions.</li>
+          <li>Think like a specific user: new, impatient, on a bad connection.</li>
+        </ul>
+        <div class="note">
+          <b>Exploratory is not random</b>It has a goal, a time limit and notes. Without them it is
+          hard to say what was tested.
+        </div>
+
+        <h2>Other techniques worth knowing</h2>
+        <ul class="c">
+          <li>
+            <b>Decision tables:</b> list every combination of conditions and the expected result.
+            Useful for business rules with several inputs.
+          </li>
+          <li>
+            <b>State transition testing:</b> map the states an item can be in, like an order going
+            from placed to paid to shipped, and test every allowed and forbidden move.
+          </li>
+          <li>
+            <b>Error guessing:</b> use experience to target what usually breaks: empty values,
+            special characters, slow networks, double taps.
+          </li>
+        </ul>
+      </main>
+    </div>
+  </body>
+</html>

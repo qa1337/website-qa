@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+  <head>
+<meta name="robots" content="noindex, nofollow">
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>[QA] Bug reports – QA1337 Guidelines</title>
+    <meta
+      name="description"
+      content="How to write a bug report: title format, template and a filled-in example."
+    />
+    <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
+    <meta name="apple-mobile-web-app-title" content="QA1337" />
+    <link rel="stylesheet" href="../assets/style.css" />
+    <script src="../assets/site.js" data-root="../" defer></script>
+  <link rel="stylesheet" href="/assets/qa.css">
+</head>
+  <body data-page="bug-reports" data-section="resources">
+<div class="qa-banner">QA version · not the live site <a id="qa-live" href="https://qa1337.com/">View this page on live</a></div>
+<script>document.getElementById('qa-live').href='https://qa1337.com'+location.pathname+location.search+location.hash</script>
+
+    <div class="gbar"></div>
+    <header class="lbar"></header>
+    <div class="wrap">
+      <nav id="nav" aria-label="Guidelines"></nav>
+      <main>
+        <h1>Bug reports</h1>
+        <p class="lead">
+          A good bug report lets anyone reproduce the problem without asking you a single question.
+          Use the same title format and template every time.
+        </p>
+
+        <h2>Title format</h2>
+        <p>
+          Start with the platform in capital letters, then the area of the app, then a short
+          description:
+        </p>
+        <pre><code>PLATFORM - Subtopic - Short description</code></pre>
+        <ul class="c">
+          <li>
+            <b>Platform</b> in all caps: <code>ANDROID</code>, <code>IOS</code>, <code>WEB</code>,
+            or <code>ALL</code> if it happens everywhere.
+          </li>
+          <li>
+            <b>Subtopic</b>: the screen or feature, for example Scan Screen, Login or Checkout.
+          </li>
+          <li><b>Short description</b>: what goes wrong, in a few words.</li>
+        </ul>
+        <pre><code>ANDROID - Scan Screen - App crashes when torch is on
+IOS - Login - Keyboard covers the password field
+WEB - Checkout - Pay button stays disabled after entering a valid card</code></pre>
+        <div class="note">
+          <b>One bug per report</b>If you find two problems, write two reports. It keeps each fix
+          and retest simple.
+        </div>
+
+        <h2>Template</h2>
+        <p>Copy this into the bug tracker and fill in every section.</p>
+        <pre><code>PLATFORM - Subtopic - Short description
+
+Repro Steps:
+
+1.
+2.
+3.
+
+Behavior:
+
+* Expected -
+* Actual -
+
+Is it a regression?
+
+*
+
+More Info
+
+*
+
+Repro Device(s):
+
+*
+
+Date:
+
+* 00/00/0000
+
+Screenshot/Video/Crash Logs/Links</code></pre>
+
+        <h2>Example</h2>
+        <pre><code>ANDROID - Scan Screen - App crashes when torch is on
+
+Repro Steps:
+
+1. From the latest master app, open the app and go to the scan screen
+2. Turn on the torch button
+3. The app crashes.
+
+Behavior:
+
+* Expected - App won't crash when torch is on
+* Actual - App is crashing when torch is on
+
+Is it a regression?
+
+* Yes, regression with the latest release
+
+More Info
+
+* On iOS, it works fine
+
+Repro Device(s):
+
+* Galaxy S25
+
+Date:
+
+* 00/00/0000
+
+Screenshot/Video/Crash Logs/Links</code></pre>
+
+        <h2>What goes in each section</h2>
+
+        <h3>Repro Steps</h3>
+        <ul class="c">
+          <li>Start with the build you used, for example "From the latest master app".</li>
+          <li>One action per step, numbered, in the order you did them.</li>
+          <li>End with the step where the problem shows up.</li>
+        </ul>
+
+        <h3>Behavior</h3>
+        <ul class="c">
+          <li><b>Expected</b>: what should happen.</li>
+          <li><b>Actual</b>: what happens instead.</li>
+        </ul>
+
+        <h3>Is it a regression?</h3>
+        <ul class="c">
+          <li><b>Yes</b> if it worked in an earlier build. Say which one, if you know.</li>
+          <li><b>No</b> if it never worked, or <b>Not sure</b> if you couldn't check.</li>
+        </ul>
+
+        <h3>More Info</h3>
+        <ul class="c">
+          <li>
+            Anything that helps narrow it down: other platforms, other devices, how often it
+            happens.
+          </li>
+          <li>For example "On iOS, it works fine" or "Happens 3 out of 5 times".</li>
+        </ul>
+
+        <h3>Repro Device(s)</h3>
+        <ul class="c">
+          <li>Every device where you saw the bug, with the OS version if you have it.</li>
+          <li>For web bugs, the browser and its version.</li>
+        </ul>
+
+        <h3>Date</h3>
+        <ul class="c">
+          <li>The day you found the bug. It helps match it with logs and builds from that day.</li>
+        </ul>
+
+        <h3>Screenshot/Video/Crash Logs/Links</h3>
+        <ul class="c">
+          <li>
+            A screenshot or short screen recording showing the problem. See
+            <a href="screen-capture">Screenshots and screen recording</a>.
+          </li>
+          <li>
+            Crash or error logs for crashes and errors. See
+            <a href="../ios/crash-logs">iOS</a>, <a href="../android/crash-logs">Android</a> and
+            <a href="../web/crash-logs">Browser</a>.
+          </li>
+          <li>Links to the page, build or related tickets.</li>
+        </ul>
+      </main>
+    </div>
+  </body>
+</html>

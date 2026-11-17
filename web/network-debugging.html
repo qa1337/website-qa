@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+<meta name="robots" content="noindex, nofollow">
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>[QA] Network debugging – QA1337 Guidelines</title>
+    <meta name="description" content="Find and export failing requests." />
+    <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
+    <meta name="apple-mobile-web-app-title" content="QA1337" />
+    <link rel="stylesheet" href="../assets/style.css" />
+    <script src="../assets/site.js" data-root="../" defer></script>
+  <link rel="stylesheet" href="/assets/qa.css">
+</head>
+  <body data-page="web-network" data-section="web">
+<div class="qa-banner">QA version · not the live site <a id="qa-live" href="https://qa1337.com/">View this page on live</a></div>
+<script>document.getElementById('qa-live').href='https://qa1337.com'+location.pathname+location.search+location.hash</script>
+
+    <div class="gbar"></div>
+    <header class="lbar"></header>
+    <div class="wrap">
+      <nav id="nav" aria-label="Guidelines"></nav>
+      <main>
+        <h1>Network debugging</h1>
+        <p class="lead">Most web bugs show up as a failing or slow request.</p>
+        <h2>Export a HAR file</h2>
+        <ul class="c">
+          <li>Open DevTools and select the Network panel.</li>
+          <li>Enable Preserve log, then reproduce the problem.</li>
+          <li>Right-click the list and choose Save all as HAR with content.</li>
+        </ul>
+        <h2>Inspect the failing request</h2>
+        <ul class="c">
+          <li>Status code and response body.</li>
+          <li>Request payload and headers.</li>
+          <li>Timing: waiting time versus download time.</li>
+        </ul>
+        <div class="note">
+          <b>Before you share</b>HAR files can contain cookies and tokens. Remove them before
+          attaching a file to a ticket.
+        </div>
+      </main>
+    </div>
+  </body>
+</html>

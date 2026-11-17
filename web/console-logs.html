@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+<meta name="robots" content="noindex, nofollow">
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>[QA] Console logs – QA1337 Guidelines</title>
+    <meta name="description" content="Read the browser console before filing a bug." />
+    <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
+    <meta name="apple-mobile-web-app-title" content="QA1337" />
+    <link rel="stylesheet" href="../assets/style.css" />
+    <script src="../assets/site.js" data-root="../" defer></script>
+  <link rel="stylesheet" href="/assets/qa.css">
+</head>
+  <body data-page="web-console-logs" data-section="web">
+<div class="qa-banner">QA version · not the live site <a id="qa-live" href="https://qa1337.com/">View this page on live</a></div>
+<script>document.getElementById('qa-live').href='https://qa1337.com'+location.pathname+location.search+location.hash</script>
+
+    <div class="gbar"></div>
+    <header class="lbar"></header>
+    <div class="wrap">
+      <nav id="nav" aria-label="Guidelines"></nav>
+      <main>
+        <h1>Console logs</h1>
+        <p class="lead">Read the console, network, and storage panels before filing a bug.</p>
+        <h2>What to capture</h2>
+        <ul class="c">
+          <li>Console errors with the full stack trace.</li>
+          <li>The failing request as a HAR export.</li>
+          <li>Local storage and cookies at the time of failure.</li>
+        </ul>
+        <div class="note">
+          <b>Tip</b>Enable “Preserve log” so navigation does not clear the console.
+        </div>
+      </main>
+    </div>
+  </body>
+</html>

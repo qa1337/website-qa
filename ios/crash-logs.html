@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+  <head>
+<meta name="robots" content="noindex, nofollow">
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>[QA] Crash &amp; error logs – QA1337 Guidelines</title>
+    <meta
+      name="description"
+      content="Collect crash reports and device logs from an iPhone or iPad for a bug report."
+    />
+    <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
+    <meta name="apple-mobile-web-app-title" content="QA1337" />
+    <link rel="stylesheet" href="../assets/style.css" />
+    <script src="../assets/site.js" data-root="../" defer></script>
+  <link rel="stylesheet" href="/assets/qa.css">
+</head>
+  <body data-page="ios-crash-logs" data-section="ios">
+<div class="qa-banner">QA version · not the live site <a id="qa-live" href="https://qa1337.com/">View this page on live</a></div>
+<script>document.getElementById('qa-live').href='https://qa1337.com'+location.pathname+location.search+location.hash</script>
+
+    <div class="gbar"></div>
+    <header class="lbar"></header>
+    <div class="wrap">
+      <nav id="nav" aria-label="Guidelines"></nav>
+      <main>
+        <h1>iOS crash &amp; error logs</h1>
+        <p class="lead">
+          Collect crash reports and device logs from an iPhone or iPad so developers can find the
+          cause of a crash, freeze or error.
+        </p>
+        <p class="related">
+          Other platforms: <a href="../android/crash-logs">Android crash &amp; error logs</a> ·
+          <a href="../web/crash-logs">Browser exception &amp; error logs</a>
+        </p>
+
+        <h2>Before you start</h2>
+        <ul class="c">
+          <li>A Mac with Xcode installed.</li>
+          <li>A USB cable for the iPhone or iPad.</li>
+          <li>
+            Write down the time the crash happened. Crash reports are listed by app name and time.
+          </li>
+        </ul>
+
+        <h2>View crash reports in Xcode</h2>
+        <p>Use this when the crash already happened on the device.</p>
+        <ol class="s">
+          <li>Connect the device with USB, unlock it and tap <b>Trust</b> if asked.</li>
+          <li>In Xcode, open <b>Window › Devices and Simulators</b>.</li>
+          <li>On the <b>Devices</b> tab, select your device under <b>Connected</b>.</li>
+          <li>
+            Click <b>Open Recent Logs</b>. Crash reports are listed with the app name and timestamp.
+          </li>
+          <li>
+            Find the report that matches the time of the crash and export it, or drag it to Finder.
+            Attach the file to the bug report as it is.
+          </li>
+        </ol>
+        <figure class="shot">
+          <img
+            src="../images/xcode-device-and-simulators.png"
+            width="2266"
+            height="1372"
+            loading="lazy"
+            alt="Xcode Devices and Simulators window with a connected iPhone and the Open Recent Logs and Open Console buttons"
+          />
+          <figcaption>Xcode › Window › Devices and Simulators.</figcaption>
+        </figure>
+
+        <h2>Capture live logs while you reproduce</h2>
+        <p>Use this when you can make the problem happen again.</p>
+        <ol class="s">
+          <li>In the same window, click <b>Open Console</b>. The Console app opens on your Mac.</li>
+          <li>Select the device in the sidebar and click <b>Start</b> to begin streaming.</li>
+          <li>Type the app name in the search field to hide messages from other apps.</li>
+          <li>Reproduce the issue, then click <b>Pause</b>.</li>
+          <li>
+            Select the messages (<code>⌘A</code>), copy them and save them in a
+            <code>.txt</code> file.
+          </li>
+        </ol>
+
+        <h2>Without a Mac</h2>
+        <p>Testers can share crash reports straight from the device.</p>
+        <ol class="s">
+          <li>
+            Open
+            <b>Settings › Privacy &amp; Security › Analytics &amp; Improvements › Analytics Data</b
+            >.
+          </li>
+          <li>Find the entry that starts with the app name and the date of the crash.</li>
+          <li>Open it and tap the share button to send the file.</li>
+        </ol>
+
+        <h2>What to include in the report</h2>
+        <ul class="c">
+          <li>App version and build number.</li>
+          <li>Device model and iOS version.</li>
+          <li>Date and time of the crash, and the steps to reproduce it.</li>
+          <li>
+            A zip file with all the logs from the session, not only the lines that show the crash.
+          </li>
+        </ul>
+        <div class="note">
+          <b>Keep the original file</b>Send the crash report file itself (<code>.ips</code>) instead
+          of copied text. Developers need the full file to match the crash to the code.
+        </div>
+      </main>
+    </div>
+  </body>
+</html>

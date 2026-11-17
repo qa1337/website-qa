@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+<meta name="robots" content="noindex, nofollow">
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>[QA] Storage and cookies – QA1337 Guidelines</title>
+    <meta name="description" content="Inspect and reset browser storage." />
+    <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
+    <meta name="apple-mobile-web-app-title" content="QA1337" />
+    <link rel="stylesheet" href="../assets/style.css" />
+    <script src="../assets/site.js" data-root="../" defer></script>
+  <link rel="stylesheet" href="/assets/qa.css">
+</head>
+  <body data-page="web-storage" data-section="web">
+<div class="qa-banner">QA version · not the live site <a id="qa-live" href="https://qa1337.com/">View this page on live</a></div>
+<script>document.getElementById('qa-live').href='https://qa1337.com'+location.pathname+location.search+location.hash</script>
+
+    <div class="gbar"></div>
+    <header class="lbar"></header>
+    <div class="wrap">
+      <nav id="nav" aria-label="Guidelines"></nav>
+      <main>
+        <h1>Storage and cookies</h1>
+        <p class="lead">
+          Stale or corrupt browser data causes bugs that only appear for some users.
+        </p>
+        <h2>Inspect storage</h2>
+        <p>
+          Open DevTools and select the Application panel to view local storage, session storage,
+          IndexedDB, and cookies.
+        </p>
+        <h2>Reset to a clean state</h2>
+        <pre><code>localStorage.clear();
+sessionStorage.clear();</code></pre>
+        <h2>Cookie flags to check</h2>
+        <ul class="c">
+          <li><code>Secure</code>: sent only over HTTPS.</li>
+          <li><code>HttpOnly</code>: not readable by scripts.</li>
+          <li><code>SameSite</code>: controls cross-site sending.</li>
+        </ul>
+      </main>
+    </div>
+  </body>
+</html>

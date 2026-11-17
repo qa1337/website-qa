@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+  <head>
+<meta name="robots" content="noindex, nofollow">
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>[QA] Smoke, sanity and regression testing – QA1337 Guidelines</title>
+    <meta
+      name="description"
+      content="What each one checks after a new build, and how they fit together."
+    />
+    <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
+    <meta name="apple-mobile-web-app-title" content="QA1337" />
+    <link rel="stylesheet" href="../assets/style.css" />
+    <script src="../assets/site.js" data-root="../" defer></script>
+  <link rel="stylesheet" href="/assets/qa.css">
+</head>
+  <body data-page="fund-smoke" data-section="fundamentals">
+<div class="qa-banner">QA version · not the live site <a id="qa-live" href="https://qa1337.com/">View this page on live</a></div>
+<script>document.getElementById('qa-live').href='https://qa1337.com'+location.pathname+location.search+location.hash</script>
+
+    <div class="gbar"></div>
+    <header class="lbar"></header>
+    <div class="wrap">
+      <nav id="nav" aria-label="Guidelines"></nav>
+      <main>
+        <h1>Smoke, sanity and regression testing</h1>
+        <p class="lead">
+          Three kinds of testing that answer three different questions after a new build: does it
+          work at all, does the fix work, and did anything else break?
+        </p>
+
+        <h2>At a glance</h2>
+        <div class="tbl">
+          <table>
+            <thead>
+              <tr>
+                <th>Type</th>
+                <th>Question</th>
+                <th>Scope</th>
+                <th>Time</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><b>Smoke</b></td>
+                <td>Is this build stable enough to test?</td>
+                <td>Wide and shallow</td>
+                <td>Minutes</td>
+              </tr>
+              <tr>
+                <td><b>Sanity</b></td>
+                <td>Does this fix or change work?</td>
+                <td>Narrow and focused</td>
+                <td>Minutes to an hour</td>
+              </tr>
+              <tr>
+                <td><b>Regression</b></td>
+                <td>Did the change break anything that used to work?</td>
+                <td>Wide and deep</td>
+                <td>Hours to days</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2>Smoke testing</h2>
+        <p>
+          A quick check of the most important paths on every new build. If smoke fails, stop and
+          send the build back. There is no point running a full test pass on a build that can't
+          sign in.
+        </p>
+        <ul class="c">
+          <li>The app installs and launches.</li>
+          <li>Sign in and sign out work.</li>
+          <li>The main screens load with data.</li>
+          <li>The primary flow completes end to end, for example search, add to cart, pay.</li>
+        </ul>
+        <div class="note">
+          <b>Automate it</b>Smoke tests run on every build, so they are the first tests worth
+          automating.
+        </div>
+
+        <h2>Sanity testing</h2>
+        <p>
+          A focused check of one fix or small change, plus the area right around it. It tells you
+          whether the build is ready for deeper testing.
+        </p>
+        <pre><code>Fix: "Pay button stays disabled after entering a valid card"
+
+Sanity:
+1. Enter a valid card: Pay is enabled
+2. Enter an expired card: Pay stays disabled, error shows
+3. Edit the card number after a valid one: Pay updates correctly
+4. Pay: the order goes through</code></pre>
+
+        <h2>Regression testing</h2>
+        <p>
+          Re-running tests on features that already worked, to make sure new code didn't break
+          them. A bug that comes back, or a feature that stops working after a change, is a
+          regression.
+        </p>
+        <h3>How to pick what to retest</h3>
+        <ul class="c">
+          <li>Everything near the change: same screen, same API, same shared component.</li>
+          <li>The flows that make money or that most users use.</li>
+          <li>Areas that broke before. Bugs cluster.</li>
+          <li>Anything touched by a library, SDK or OS update.</li>
+        </ul>
+        <h3>Keep the suite healthy</h3>
+        <ul class="c">
+          <li>Add a test for every bug you find, so it can't come back unnoticed.</li>
+          <li>Remove tests for features that no longer exist.</li>
+          <li>Automate the stable, repetitive parts and keep manual time for new features.</li>
+        </ul>
+        <p>
+          When you report a regression, say so in the bug: see "Is it a regression?" in
+          <a href="../resources/bug-reports">Bug reports</a>.
+        </p>
+
+        <h2>How they fit together</h2>
+        <ol class="s">
+          <li>New build arrives: run the <b>smoke</b> test.</li>
+          <li>Smoke passes: run <b>sanity</b> on the fixes in this build.</li>
+          <li>Before release: run the <b>regression</b> suite.</li>
+        </ol>
+      </main>
+    </div>
+  </body>
+</html>

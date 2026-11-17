@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="en">
+  <head>
+<meta name="robots" content="noindex, nofollow">
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>[QA] Screenshots and screen recording – QA1337 Guidelines</title>
+    <meta
+      name="description"
+      content="Take screenshots, record the screen and mirror devices live on iOS, Android, macOS, Windows, Linux, ChromeOS and the browser."
+    />
+    <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
+    <meta name="apple-mobile-web-app-title" content="QA1337" />
+    <link rel="stylesheet" href="../assets/style.css" />
+    <script src="../assets/site.js" data-root="../" defer></script>
+  <link rel="stylesheet" href="/assets/qa.css">
+</head>
+  <body data-page="screen-capture" data-section="resources">
+<div class="qa-banner">QA version · not the live site <a id="qa-live" href="https://qa1337.com/">View this page on live</a></div>
+<script>document.getElementById('qa-live').href='https://qa1337.com'+location.pathname+location.search+location.hash</script>
+
+    <div class="gbar"></div>
+    <header class="lbar"></header>
+    <div class="wrap">
+      <nav id="nav" aria-label="Guidelines"></nav>
+      <main>
+        <h1>Screenshots and screen recording</h1>
+        <p class="lead">
+          A short video is often the fastest way to explain a bug. How to capture the screen on
+          every platform, and how to mirror a phone live on your computer.
+        </p>
+
+        <h2>Quick reference</h2>
+        <div class="tbl">
+          <table>
+            <thead>
+              <tr>
+                <th>Platform</th>
+                <th>Screenshot</th>
+                <th>Screen recording</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><b>iPhone / iPad</b></td>
+                <td>Side button + Volume up</td>
+                <td>Control Center → Screen Recording</td>
+              </tr>
+              <tr>
+                <td><b>iOS Simulator</b></td>
+                <td><code>Cmd+S</code></td>
+                <td><code>Cmd+R</code></td>
+              </tr>
+              <tr>
+                <td><b>Android</b></td>
+                <td>Power + Volume down</td>
+                <td>Quick Settings → Screen record</td>
+              </tr>
+              <tr>
+                <td><b>macOS</b></td>
+                <td><code>Cmd+Shift+3</code> / <code>4</code></td>
+                <td><code>Cmd+Shift+5</code></td>
+              </tr>
+              <tr>
+                <td><b>Windows</b></td>
+                <td><code>Win+Shift+S</code></td>
+                <td>Snipping Tool → Record</td>
+              </tr>
+              <tr>
+                <td><b>Linux (GNOME)</b></td>
+                <td><code>Print Screen</code></td>
+                <td><code>Print Screen</code> → video toggle</td>
+              </tr>
+              <tr>
+                <td><b>ChromeOS</b></td>
+                <td><code>Ctrl</code> + Show windows</td>
+                <td>Quick Settings → Screen capture</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2>iOS</h2>
+
+        <h3>On the device</h3>
+        <ul class="c">
+          <li>
+            <b>Screenshot:</b> press the side button and Volume up together. On iPhones with a Home
+            button, press Home and the side button.
+          </li>
+          <li>
+            <b>Recording:</b> open Control Center and tap Screen Recording. If it isn't there, add
+            it from the Control Center edit mode (or Settings → Control Center on older iOS).
+          </li>
+          <li>Long-press the Screen Recording button to turn the microphone on or off.</li>
+          <li>Tap the red indicator at the top of the screen to stop. The video goes to Photos.</li>
+        </ul>
+
+        <h3>Mirror live with QuickTime</h3>
+        <p>
+          QuickTime Player on a Mac can show an iPhone or iPad screen live over a cable. Use it to
+          demo a bug in a call, or to record in better quality without filling the phone.
+        </p>
+        <ol class="s">
+          <li>Connect the device to the Mac with a cable, unlock it and tap Trust if asked.</li>
+          <li>Open QuickTime Player and choose File → New Movie Recording.</li>
+          <li>
+            Click the arrow next to the record button and choose the device under Camera. Choose it
+            under Microphone too, to get the app's sound.
+          </li>
+          <li>The device screen appears live. Click record to save it as a video.</li>
+        </ol>
+        <div class="note">
+          <b>Clean status bar</b>While recording, iOS usually shows a tidy status bar with full battery and
+          signal, which is nice for screenshots and demos.
+        </div>
+
+        <h3>From Xcode and the Simulator</h3>
+        <ul class="c">
+          <li>
+            <b>Real device:</b> Window → Devices and Simulators, select the device, then Take
+            Screenshot.
+          </li>
+          <li>
+            <b>Simulator:</b> File → Save Screen (<code>Cmd+S</code>) and File → Record Screen
+            (<code>Cmd+R</code>). Files are saved to the Desktop.
+          </li>
+        </ul>
+        <pre><code># Screenshot of the booted simulator
+xcrun simctl io booted screenshot screen.png
+
+# Record video, press Ctrl+C to stop
+xcrun simctl io booted recordVideo bug.mov</code></pre>
+        <p>More in <a href="../ios/simulators">Simulators</a>.</p>
+
+        <h2>Android</h2>
+
+        <h3>On the device</h3>
+        <ul class="c">
+          <li><b>Screenshot:</b> press Power and Volume down together.</li>
+          <li>
+            <b>Recording:</b> swipe down twice to open Quick Settings and tap Screen record (Screen
+            recorder on Samsung). Available from Android 11.
+          </li>
+          <li>
+            Turn on <b>Show taps</b> in Developer options, so the video shows where you tapped.
+          </li>
+        </ul>
+
+        <h3>With ADB</h3>
+        <pre><code># Screenshot straight to your computer
+adb exec-out screencap -p &gt; screen.png
+
+# Record video (stops after 3 minutes, or press Ctrl+C)
+adb shell screenrecord /sdcard/bug.mp4
+adb pull /sdcard/bug.mp4</code></pre>
+        <p>
+          Setting up ADB is covered in <a href="../android/adb">Platform tools &amp; ADB</a>. In the
+          emulator, use the camera button in the side toolbar, or Extended controls → Record and
+          Playback. See <a href="../android/emulators">Emulators</a>.
+        </p>
+
+        <h3>Mirror live with scrcpy</h3>
+        <p>
+          <a href="https://github.com/Genymobile/scrcpy">scrcpy</a> is a free, open source tool
+          that shows and controls an Android device from your computer, on macOS, Windows and
+          Linux. You can type with your keyboard, click with the mouse and record at the same time.
+        </p>
+        <ol class="s">
+          <li>Turn on USB debugging on the device and connect it with a cable.</li>
+          <li>Install scrcpy. On a Mac with Homebrew:</li>
+        </ol>
+        <pre><code>brew install scrcpy
+brew install --cask android-platform-tools</code></pre>
+        <ol class="s" start="3">
+          <li>Run it. The device screen opens in a window.</li>
+        </ol>
+        <pre><code># Mirror the screen
+scrcpy
+
+# Mirror and record to a file
+scrcpy --record=bug.mp4
+
+# Show taps, keep the device awake, smaller window
+scrcpy --show-touches --stay-awake --max-size=1024</code></pre>
+        <div class="note">
+          <b>Audio</b>scrcpy also forwards the device sound on Android 11 and later, so recordings
+          include it.
+        </div>
+
+        <h2>macOS</h2>
+        <ul class="c">
+          <li><code>Cmd+Shift+3</code>: the whole screen.</li>
+          <li><code>Cmd+Shift+4</code>: drag to select an area. Press Space to capture a window.</li>
+          <li>
+            <code>Cmd+Shift+5</code>: toolbar to record the whole screen or a selected area.
+            Options lets you turn on the microphone and show mouse clicks.
+          </li>
+          <li>QuickTime Player → File → New Screen Recording does the same.</li>
+        </ul>
+
+        <h2>Windows</h2>
+        <ul class="c">
+          <li>
+            <code>Win+Shift+S</code>: Snipping Tool, to capture an area, window or the full screen.
+          </li>
+          <li><code>PrtScn</code>: the full screen, to the clipboard or Snipping Tool.</li>
+          <li>
+            <b>Recording:</b> open Snipping Tool, switch to Record and select an area (Windows 11).
+          </li>
+          <li>
+            <code>Win+Alt+R</code>: Xbox Game Bar records the current app window, not the desktop.
+          </li>
+        </ul>
+
+        <h2>Linux</h2>
+        <ul class="c">
+          <li>
+            <b>GNOME:</b> press Print Screen to open the screenshot tool. It switches between
+            screenshot and screen recording.
+          </li>
+          <li><b>KDE Plasma:</b> Spectacle, also on Print Screen, takes screenshots and videos.</li>
+          <li>On any desktop, OBS Studio works for longer recordings.</li>
+        </ul>
+
+        <h2>ChromeOS</h2>
+        <ul class="c">
+          <li><code>Ctrl</code> + Show windows: the full screen.</li>
+          <li><code>Ctrl+Shift</code> + Show windows: opens the screen capture tool.</li>
+          <li>
+            <b>Recording:</b> Quick Settings → Screen capture, then switch to video. Files go to
+            Downloads.
+          </li>
+        </ul>
+
+        <h2>Browser</h2>
+        <ul class="c">
+          <li>
+            <b>Chrome and Edge:</b> open DevTools, press <code>Cmd+Shift+P</code> (or
+            <code>Ctrl+Shift+P</code>) and run Capture full size screenshot for the whole page, or
+            Capture node screenshot for one element.
+          </li>
+          <li><b>Firefox:</b> right-click the page and choose Take Screenshot.</li>
+          <li>
+            Turn on the device toolbar in DevTools to capture the page at a phone screen size.
+          </li>
+        </ul>
+
+        <h2>Tips for bug videos</h2>
+        <ul class="c">
+          <li>
+            Start recording a few seconds before the first step, and stop right after the bug.
+          </li>
+          <li>Keep it short. One bug per video, ideally under a minute.</li>
+          <li>Show taps or clicks, so people can follow what you did.</li>
+          <li>
+            Turn on Do Not Disturb, and hide personal data, real accounts and notifications.
+          </li>
+          <li>
+            If a file is too big for the bug tracker, compress it, for example with ffmpeg:
+          </li>
+        </ul>
+        <pre><code>ffmpeg -i bug.mov -vcodec libx264 -crf 28 bug.mp4</code></pre>
+        <p>
+          Attach the video to the last section of your <a href="bug-reports">bug report</a>.
+        </p>
+      </main>
+    </div>
+  </body>
+</html>
